@@ -762,6 +762,8 @@ static int dump_line_label(void)
    }
    else
    {
+      if(s_lab[0] == ' ')
+          s_lab++;
       fprintf (output, "%.*s", (int) (e_lab - s_lab), s_lab);
       cur_col = count_columns (cur_col, s_lab, NULL_CHAR);
    }

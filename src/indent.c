@@ -885,6 +885,15 @@ static void handle_token_colon(
                   !isdigit (*buf_ptr)) &&
                 !(((e_code - s_code > 5) &&
                    !strncmp (&buf_ptr[-7], "public:", 7)) &&
+                  !isdigit (*buf_ptr)) &&
+                !(((e_code - s_code > 11) &&
+                   !strncmp (&buf_ptr[-13], "public slots:", 13)) &&
+                  !isdigit (*buf_ptr)) &&
+                !(((e_code - s_code > 12) &&
+                   !strncmp (&buf_ptr[-14], "private slots:", 14)) &&
+                  !isdigit (*buf_ptr)) &&
+                !(((e_code - s_code > 14) &&
+                   !strncmp (&buf_ptr[-16], "protected slots:", 16)) &&
                   !isdigit (*buf_ptr)))
             {
                 *e_code++ = ':';
@@ -2909,8 +2918,13 @@ static exit_values_ty indent_main_loop(
                          &hd_type, &dec_ind, &last_token_ends_sp, &file_exit_value,
                          can_break, &last_else, is_procname_definition,
                          pbreak_line);
-        
+
         *e_code = '\0';         /* make sure code section is null terminated */
+        
+        if ((e_code - s_code > 6) && !strncmp (&buf_ptr[-8], "Q_OBJECT", 8))
+        {
+            dump_line(true, &paren_target, pbreak_line);
+        }
 
         if ((type_code != comment) &&
             (type_code != cplus_comment) &&
