@@ -1545,6 +1545,7 @@ static void handle_token_decl(
         parser_state_tos->saw_double_colon &&
         !strncmp (token, "const", 5))
     {
+        /*
         char           * t_ptr;
         set_buf_break (bb_const_qualifier, paren_target);
         *e_code++ = ' ';
@@ -1554,6 +1555,7 @@ static void handle_token_decl(
             check_code_size();
             *e_code++ = *t_ptr;
         }
+        */
 
         *e_code = '\0';     /* null terminate code sect */
     }
